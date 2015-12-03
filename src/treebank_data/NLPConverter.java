@@ -35,7 +35,7 @@ public class NLPConverter extends DefaultHandler{
 	{
 		boolean id = false;
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("D:\\data\\textmining\\treebank_data\\output.txt", true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt", true)));
 			for (int i = 0; i < atts.getLength(); i++) {
 				qName = atts.getQName(i);
 				localName = atts.getLocalName(i);
