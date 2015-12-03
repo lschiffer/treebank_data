@@ -81,7 +81,7 @@ public class NLPConverter extends DefaultHandler{
 	                       String qName) throws SAXException
 	{
 		try{
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("D:\\data\\textmining\\treebank_data\\output.txt", true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt", true)));
 			if (qName.equals("sentence")) System.out.println("");
 			if (qName.equals("sentence")) out.println("");
 			out.close();
@@ -124,12 +124,14 @@ public class NLPConverter extends DefaultHandler{
 			SAXParser saxParser = factory.newSAXParser();
 
 			FileReader fr = new FileReader("v2.0/Latin/perseus-lattb.2219.1.xml");
+			FileReader fr2 = new FileReader("v2.0/Latin/perseus-lattb.1248.1.xml");
+			InputSource is2 = new InputSource(fr2);
 			InputSource is = new InputSource(fr);
 
 			NLPConverter converter = new NLPConverter();
 
 			saxParser.parse(is,converter);
-
+			saxParser.parse(is2,converter);
 
 		}
 		catch (IOException | SAXException | ParserConfigurationException e) {
