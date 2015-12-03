@@ -49,7 +49,8 @@ public class NLPConverter extends DefaultHandler{
 					String value = atts.getValue(qName);
 					if (value.equals(",") || value.equals(";")) System.out.print("<SPLIT>" + value);
 					else if (id && value.equals("'")) System.out.print("'<SPLIT>");
-					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":") || value.equals("'") || value.equals("·"))
+					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":")
+							|| value.equals("'") || value.equals("·") || value.equals("\""))
 						System.out.print("<SPLIT>" + value);
 					else if (value.equals("-que")) System.out.print("<SPLIT>que");
 					else if (id) System.out.print(value);
@@ -57,7 +58,8 @@ public class NLPConverter extends DefaultHandler{
 
 					if (value.equals(",") || value.equals(";")) out.print("<SPLIT>" + value);
 					else if (id && value.equals("'")) out.print("'<SPLIT>");
-					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":") || value.equals("'") || value.equals("·"))
+					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":")
+							|| value.equals("'") || value.equals("·") || value.equals("\""))
 						out.print("<SPLIT>" + value);
 					else if (value.equals("-que")) out.print("<SPLIT>que");
 					else if (id) out.print(value);
