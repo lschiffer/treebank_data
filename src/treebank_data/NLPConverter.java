@@ -125,13 +125,40 @@ public class NLPConverter extends DefaultHandler{
 
 			FileReader fr = new FileReader("v2.0/Latin/perseus-lattb.2219.1.xml");
 			FileReader fr2 = new FileReader("v2.0/Latin/perseus-lattb.1248.1.xml");
+			FileReader fr3 = new FileReader("v2.0/Latin/phi0448.phi001.perseus-lat1.tb.xml");
+			FileReader fr4 = new FileReader("v2.0/Latin/phi0474.phi013.perseus-lat1.tb.xml");
+			FileReader fr5 = new FileReader("v2.0/Latin/phi0620.phi001.perseus-lat1.tb.xml");
+			FileReader fr6 = new FileReader("v2.0/Latin/phi0631.phi001.perseus-lat1.tb.xml");
+			FileReader fr7 = new FileReader("v2.0/Latin/phi0690.phi003.perseus-lat1.tb.xml");
+			FileReader fr8 = new FileReader("v2.0/Latin/phi0959.phi006.perseus-lat1.tb.xml");
+			FileReader fr9 = new FileReader("v2.0/Latin/phi0972.phi001.perseus-lat1.tb.xml");
+			FileReader fr0 = new FileReader("v2.0/Latin/tlg0031.tlg027.perseus-lat1.tb.xml");
+
 			InputSource is2 = new InputSource(fr2);
 			InputSource is = new InputSource(fr);
+			InputSource is3 = new InputSource(fr3);
+			InputSource is4 = new InputSource(fr4);
+			InputSource is5 = new InputSource(fr5);
+			InputSource is6 = new InputSource(fr6);
+			InputSource is7 = new InputSource(fr7);
+			InputSource is8 = new InputSource(fr8);
+			InputSource is9 = new InputSource(fr9);
+			InputSource is0 = new InputSource(fr0);
 
 			NLPConverter converter = new NLPConverter();
 
 			saxParser.parse(is,converter);
-			saxParser.parse(is2,converter);
+		 	saxParser.parse(is2,converter);
+			saxParser.parse(is3,converter);
+			saxParser.parse(is4,converter);
+			saxParser.parse(is5,converter);
+			saxParser.parse(is6,converter);
+			saxParser.parse(is7,converter);
+			saxParser.parse(is8,converter);
+			saxParser.parse(is9,converter);
+			saxParser.parse(is0,converter);
+
+
 
 		}
 		catch (IOException | SAXException | ParserConfigurationException e) {
