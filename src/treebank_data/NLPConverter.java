@@ -34,18 +34,24 @@ public class NLPConverter extends DefaultHandler{
 			throws SAXException
 	{
 		boolean id = false;
+		boolean insert = true;
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt", true)));
 			for (int i = 0; i < atts.getLength(); i++) {
 				qName = atts.getQName(i);
-				localName = atts.getLocalName(i);
-				uri = atts.getURI(i);
+				if (qName.equals("insertion_id")) {
+					String value = atts.getValue(qName);
+					if(value.contains("0")){
+						insert = false;
+					}
+					else insert = true;
+				}
 				if (qName.equals("id")) {
 					String value = atts.getValue(qName);
 					if (value.equals("1")) id = true;
 					else id = false;
 				}
-				if (qName.equals("form")) {
+				if (qName.equals("form") && insert) {
 					String value = atts.getValue(qName);
 					if (value.equals(",") || value.equals(";")) System.out.print("<SPLIT>" + value);
 					else if (id && value.equals("'")) System.out.print("'<SPLIT>");
