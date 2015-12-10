@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 import opennlp.tools.tokenize.*;
 import opennlp.tools.util.MarkableFileInputStreamFactory;
@@ -20,13 +21,11 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		File trainingData = new File("data/test.train");
+		File trainingData = new File("output.txt");
 		File modelFile = new File("data/model.dat");
 				
 		trainModel(trainingData, modelFile);
-		                
-		// test created model
-		
+		                		
 		InputStream modelIn = new FileInputStream(modelFile);
 
 		try {
@@ -35,16 +34,13 @@ public class Main {
 			TokenizerME tokenizer = new TokenizerME(model);
 
 			String tokens[] = tokenizer.tokenize(
-					"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,"
-					+ " totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae"
-					+ " vitae dicta sunt explicabo.");
+					"Sed ut perspiciatis unde omnis iste natus error sit voluptatemque accusantiumque doloremque laudantiumque,"
+					+ " totam rem aperiam, eaque ipsa quae ab illo inventore veritatisque et quasi architecto beataeque"
+					+ " vitae dicta sunt explicabo. ");
 			
-			double tokenProbs[] = tokenizer.getTokenProbabilities();
+			//double tokenProbs[] = tokenizer.getTokenProbabilities();
 			
-			for (int i = 0 ; i != tokens.length ; i++) {
-			    System.out.println(tokens[i]);
-			    System.out.println(tokenProbs[i]);
-			}
+			System.out.println(Arrays.toString(tokens));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,24 +60,31 @@ public class Main {
 		Charset charset = Charset.forName("UTF-8");
 		ObjectStream<String> lineStream = new PlainTextByLineStream(new MarkableFileInputStreamFactory(trainingFile),
 		    charset);
+		//ObjectStream<String> lineStream = new PlainTextByLineStream(new FileInputStream(trainingFile),
+		//	    charset);
 		ObjectStream<TokenSample> sampleStream = new TokenSampleStream(lineStream);
 
 		TokenizerModel model;
-
+		
 		try {
-		  model = TokenizerME.train(sampleStream, new TokenizerFactory("latin", null, true, null), TrainingParameters.defaultParams()) ;
+			
+			TrainingParameters params = TrainingParameters.defaultParams();
+			//params.put("CUTOFF_PARAM", "1");
+		    model = TokenizerME.train(sampleStream, new TokenizerFactory("latin", null, false, null), params);
+			//model = TokenizerME.train("latin", sampleStream, false, params);
+			
 		}
 		finally {
-		  sampleStream.close();
+			sampleStream.close();
 		}
 
 		OutputStream modelOut = null;
 		try {
-		  modelOut = new BufferedOutputStream(new FileOutputStream(modelFile));
-		  model.serialize(modelOut);
+			modelOut = new BufferedOutputStream(new FileOutputStream(modelFile));
+			model.serialize(modelOut);
 		} finally {
-		  if (modelOut != null)
-		     modelOut.close();
+			if (modelOut != null)
+				modelOut.close();
 		}
 	}
 
