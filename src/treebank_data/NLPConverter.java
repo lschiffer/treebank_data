@@ -58,7 +58,7 @@ public class NLPConverter extends DefaultHandler{
 					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":")
 							|| value.equals("'") || value.equals("·") || value.equals("\""))
 						System.out.print("<SPLIT>" + value);
-					else if (value.equals("-que")) System.out.print("<SPLIT>que");
+					else if (value.equals("-que") || value.equals("que")) System.out.print("<SPLIT>que");
 					else if (id) System.out.print(value);
 					else System.out.print(" " + value);
 
@@ -67,7 +67,7 @@ public class NLPConverter extends DefaultHandler{
 					else if (value.equals("!") || value.equals("?") || value.equals(".") || value.equals(":")
 							|| value.equals("'") || value.equals("·") || value.equals("\""))
 						out.print("<SPLIT>" + value);
-					else if (value.equals("-que")) out.print("<SPLIT>que");
+					else if (value.equals("-que") || value.equals("que")) out.print("<SPLIT>que");
 					else if (id) out.print(value);
 					else out.print(" " + value);
 
