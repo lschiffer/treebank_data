@@ -52,13 +52,108 @@ public class NLPConverterPOS extends DefaultHandler{
 
 				if (qName.equals("form") && insert) {
 					String value = atts.getValue(qName);
-					System.out.print(value);
-					out.print(value);
+					if(value.equals(".")){
+						System.out.print(value+"_. ");
+						out.print(value+"_. ");
+					}
+					else if(value.equals(",")){
+						System.out.print(value+"_, ");
+						out.print(value+"_, ");
+					}
+					else if(value.equals(":")){
+						System.out.print(value+"_: ");
+						out.print(value+"_: ");
+					}
+					else if(value.equals(";")){
+						System.out.print(value+"_; ");
+						out.print(value+"_; ");
+					}
+					else if(value.equals("?")){
+						System.out.print(value+"_? ");
+						out.print(value+"_? ");
+					}
+					else if(value.equals("!")){
+						System.out.print(value+"_! ");
+						out.print(value+"_! ");
+					}
+					else if(value.equals("'")){
+						System.out.print(value+"_' ");
+						out.print(value+"_' ");
+					}
+					else {
+						System.out.print(value);
+						out.print(value);
+					}
 				}
 				if (qName.equals("postag")) {
 					String value = atts.getValue(qName);
-					System.out.print("_" + value + " ");
-					out.print("_" + value + " ");
+					if(value.isEmpty()){
+						System.out.print("_" + "FW" + " ");
+						out.print("_" + "FW" + " ");
+					}
+					else if(value.charAt(0)=='v'){
+						if(value.charAt(3)=='r' && value.charAt(4)=='p'){
+							System.out.print("_" + "VBN" + " ");
+							out.print("_" + "VBN" + " ");
+						}
+						else if(value.charAt(4)=='n'){
+							System.out.print("_" + "VB" + " ");
+							out.print("_" + "VB" + " ");
+						}
+						else if(value.charAt(4)=='d' ||value.charAt(4)=='g'){
+							System.out.print("_" + "VBG" + " ");
+							out.print("_" + "VBG" + " ");
+						}
+						else if(value.charAt(3)=='p' || value.charAt(3)=='t' || value.charAt(3)=='f'){
+							System.out.print("_" + "VBP" + " ");
+							out.print("_" + "VBP" + " ");
+						}
+						else if(value.charAt(3)=='i' || value.charAt(3)=='r' || value.charAt(3)=='l'){
+							System.out.print("_" + "VBD" + " ");
+							out.print("_" + "VBD" + " ");
+						}
+					}
+
+					else if(value.charAt(0)=='n'){
+						System.out.print("_" + "NN" + " ");
+						out.print("_" + "NN" + " ");
+					}
+					else if(value.charAt(0)=='t'){
+						System.out.print("_" + "RP" + " ");
+						out.print("_" + "RP" + " ");
+					}
+					else if(value.charAt(0)=='a'){
+						System.out.print("_" + "JJ" + " ");
+						out.print("_" + "JJ" + " ");
+					}
+					else if(value.charAt(0)=='d'){
+						System.out.print("_" + "RB" + " ");
+						out.print("_" + "RB" + " ");
+					}
+					else if(value.charAt(0)=='c'){
+						System.out.print("_" + "CC" + " ");
+						out.print("_" + "CC" + " ");
+					}
+					else if(value.charAt(0)=='r'){
+						System.out.print("_" + "IN" + " ");
+						out.print("_" + "IN" + " ");
+					}
+					else if(value.charAt(0)=='p'){
+						System.out.print("_" + "PRP" + " ");
+						out.print("_" + "PRP" + " ");
+					}
+					else if(value.charAt(0)=='m'){
+						System.out.print("_" + "CD" + " ");
+						out.print("_" + "CD" + " ");
+					}
+					else if(value.charAt(0)=='i'){
+						System.out.print("_" + "UH" + " ");
+						out.print("_" + "UH" + " ");
+					}
+					else if(value.charAt(0)=='e'){
+						System.out.print("_" + "UH" + " ");
+						out.print("_" + "UH" + " ");
+					}
 				}
 			}
 			out.close();
