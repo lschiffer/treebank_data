@@ -33,9 +33,25 @@ import opennlp.tools.util.TrainingParameters;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		String[] tokens = testTokenization();
+		//trainSentenceDetector(new File("train_data/1_sentence.train"), new File("train_data/bin/1_sentence.dat"));
+		//trainSentenceDetector(new File("train_data/2_sentence.train"), new File("train_data/bin/2_sentence.dat")); // ?!?
+		//trainSentenceDetector(new File("train_data/1_2_sentence.train"), new File("1_2_sentence.dat"));
+
+		//trainModel(new File("train_data/1_token.train"), new File("train_data/bin/1_token.dat"));
+		//trainModel(new File("train_data/2_token.train"), new File("train_data/bin/2_token.dat"));
+		//trainModel(new File("train_data/1_9_token.train"), new File("train_data/bin/1_9_token.dat"));
+		//trainModel(new File("train_data/10_token.train"), new File("train_data/bin/10_token.dat"));// ?!?!
+		//trainModel(new File("train_data/all_token.train"), new File("train_data/bin/all_token.dat"));
 		
-		testPosTagger(tokens);
+		//trainPOSTagger(new File("train_data/1_pos.train"), new File("train_data/bin/1_pos.dat"));
+		//trainPOSTagger(new File("train_data/2_pos.train"), new File("train_data/bin/2_pos.dat"));
+		trainPOSTagger(new File("train_data/1_9_pos.train"), new File("train_data/bin/1_9_pos.dat"));
+		trainPOSTagger(new File("train_data/10_pos.train"), new File("train_data/bin/10_pos.dat"));
+		//trainPOSTagger(new File("train_data/all_pos.train"), new File("train_data/bin/all_pos.dat"));
+
+
+
+		
 	}
 	
 	
@@ -229,7 +245,8 @@ public class Main {
 
 		try {
 			
-			SentenceDetectorFactory factory = new SentenceDetectorFactory("latin", false, null, null);
+			char[] eos_chars = {'.', '!', '?', ':', ';'};
+			SentenceDetectorFactory factory = new SentenceDetectorFactory("latin", false, null, eos_chars);
 			model = SentenceDetectorME.train("latin", sampleStream, factory, TrainingParameters.defaultParams());		  
 
 		}
